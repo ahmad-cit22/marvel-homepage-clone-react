@@ -43,21 +43,21 @@ const Banner = () => {
           <div
             className="relative w-screen bg-cover bg-no-repeat font-robo"
             style={{
-              background: "url('images/backgrounds/bg-2.jpg')",
+              background: "url('images/backgrounds/bg-1.jpg')",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
             }}
           >
             <div className="w-full h-full bg-black/60 text-white font-bold px-28 py-36">
-              <p className="mb-10">'SINS OF SINISTER' </p>
+              <p className="mb-10">THIS FEBRUARY</p>
               <h1 className="text-5xl mb-10 w-[60%]">
-                THE FUTURE OF THE MARVEL UNIVERSE BELONGS TO MISTER SINISTER
+                MCU VARIANT COVERS CELEBRATE THE EPIC FILMS OF THE INFINITY SAGA
               </h1>
               <a
                 href="#"
-                className="inline-block linear duration-300 py-3 text-primary hover:text-white px-8 bg-white/40 hover:bg-hoverPrimary/40"
+                className="inline-block linear duration-300 py-3 text-primary hover:text-white px-8 bg-white/50 hover:bg-hoverPrimary/50"
               >
-                NEXT MONTH!
+                FIRST LOOK!
               </a>
             </div>
             <div className="absolute bottom-0 left-0 w-full h-[4vw] bg-black blur-2xl"></div>
@@ -77,7 +77,7 @@ const Banner = () => {
               </h1>
               <a
                 href="#"
-                className="inline-block linear duration-300 py-3 text-primary hover:text-white px-8 bg-white/40 hover:bg-hoverPrimary/40"
+                className="inline-block linear duration-300 py-3 text-primary hover:text-white px-8 bg-white/50 hover:bg-hoverPrimary/50"
               >
                 READ NOW!
               </a>
@@ -87,21 +87,21 @@ const Banner = () => {
           <div
             className="relative w-screen bg-cover bg-no-repeat font-robo"
             style={{
-              background: "url('images/backgrounds/bg-1.jpg')",
+              background: "url('images/backgrounds/bg-2.jpg')",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
             }}
           >
             <div className="w-full h-full bg-black/60 text-white font-bold px-28 py-36">
-              <p className="mb-10">THIS FEBRUARY</p>
+              <p className="mb-10">'SINS OF SINISTER' </p>
               <h1 className="text-5xl mb-10 w-[60%]">
-                MCU VARIANT COVERS CELEBRATE THE EPIC FILMS OF THE INFINITY SAGA
+                THE FUTURE OF THE MARVEL UNIVERSE BELONGS TO MISTER SINISTER
               </h1>
               <a
                 href="#"
-                className="inline-block linear duration-300 py-3 text-primary hover:text-white px-8 bg-white/40 hover:bg-hoverPrimary/40"
+                className="inline-block linear duration-300 py-3 text-primary hover:text-white px-8 bg-white/50 hover:bg-hoverPrimary/50"
               >
-                FIRST LOOK!
+                NEXT MONTH!
               </a>
             </div>
             <div className="absolute bottom-0 left-0 w-full h-[4vw] bg-black blur-2xl"></div>
@@ -121,7 +121,7 @@ const Banner = () => {
               </h1>
               <a
                 href="#"
-                className="inline-block linear duration-300 py-3 text-primary hover:text-white px-8 bg-white/40 hover:bg-hoverPrimary/40"
+                className="inline-block linear duration-300 py-3 text-primary hover:text-white px-8 bg-white/50 hover:bg-hoverPrimary/50"
               >
                 PREVIEW!
               </a>
