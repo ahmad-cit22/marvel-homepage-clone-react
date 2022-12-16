@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import { RiBarChartHorizontalFill } from "react-icons/ri";
 import { CgClose } from "react-icons/cg";
+import { RiCloseFill } from "react-icons/ri";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { RiEyeFill } from "react-icons/ri";
 import {
@@ -13,29 +14,27 @@ import {
 import { getDatabase, ref, set } from "firebase/database";
 import { BeatLoader } from "react-spinners";
 
-
 const Navbar = () => {
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showJoinModal, setShowJoinModal] = useState(false);
   const auth = getAuth();
   const db = getDatabase();
 
-  const navigate = useNavigate();
-  let [passVisibility, setPassVisibility] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showJoinModal, setShowJoinModal] = useState(false);
+  const [passVisibility, setPassVisibility] = useState(false);
 
-  let [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  let [userRegEmail, setUserRegEmail] = useState("");
-  let [userRegName, setUserRegName] = useState("");
-  let [userRegPass, setUserRegPass] = useState("");
+  const [userRegEmail, setUserRegEmail] = useState("");
+  const [userRegName, setUserRegName] = useState("");
+  const [userRegPass, setUserRegPass] = useState("");
 
-  let [errEmail, setErrEmail] = useState("");
-  let [errName, setErrName] = useState("");
-  let [errPass, setErrPass] = useState("");
+  const [errEmail, setErrEmail] = useState("");
+  const [errName, setErrName] = useState("");
+  const [errPass, setErrPass] = useState("");
 
-  let [fErrEmail, setFErrEmail] = useState("");
+  const [fErrEmail, setFErrEmail] = useState("");
 
-  let [successMsg, setSuccessMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
 
   const validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   const validName = /^[A-z\s]+$/;
@@ -67,6 +66,115 @@ const Navbar = () => {
     setPassVisibility(!passVisibility);
   };
 
+  const handleSubmit = (e) => {
+    //   e.preventDefault();
+    //   if (!userRegEmail) {
+    //     setErrEmail("You must enter your email address!");
+    //   } else if (!validEmail.test(userRegEmail)) {
+    //     setErrEmail("You must enter a valid email address!");
+    //   }
+    //   if (!userRegName) {
+    //     setErrName("You must enter your full name!");
+    //   } else if (!validName.test(userRegName)) {
+    //     setErrName("Your name can't contain any number or special characters!");
+    //   } else if (userRegName.split(" ").length < 2) {
+    //     setErrName("You must enter both your first name and last name!");
+    //   } else if (userRegName.length < 4) {
+    //     setErrName("Your name must contain at least 4 characters!");
+    //   }
+    //   if (!userRegPass) {
+    //     setErrPass("You must create a password for your account!");
+    //   } else if (!validPassU.test(userRegPass)) {
+    //     setErrPass("Password must contain at least one uppercase character!");
+    //   } else if (!validPassL.test(userRegPass)) {
+    //     setErrPass("Password must contain at least one lowercase character!");
+    //   } else if (!validPassD.test(userRegPass)) {
+    //     setErrPass("Password must contain at least one digit!");
+    //   } else if (!validPassS.test(userRegPass)) {
+    //     setErrPass("Password must contain at least one special character!");
+    //   } else if (userRegPass.length < 8 || userRegPass.length > 16) {
+    //     setErrPass("Password length must be between 8 to 16 characters!");
+    //   }
+    //   if (
+    //     userRegEmail &&
+    //     userRegName &&
+    //     userRegPass &&
+    //     validEmail.test(userRegEmail) &&
+    //     validName.test(userRegName) &&
+    //     userRegName.split(" ").length >= 2 &&
+    //     userRegName.length > 4 &&
+    //     validPass.test(userRegPass) &&
+    //     userRegPass.length > 7 &&
+    //     userRegPass.length < 17
+    //   ) {
+    //     setLoading(true);
+    //     createUserWithEmailAndPassword(auth, userRegEmail, userRegPass)
+    //       .then((userCredential) => {
+    //         // Signed in
+    //         const user = userCredential.user;
+    //         console.log(user);
+    //         updateProfile(auth.currentUser, {
+    //           displayName: userRegName,
+    //           photoURL: "images/default_avatar.png",
+    //         })
+    //           .then(() => {
+    //             console.log("Profile Updated!");
+    //             sendEmailVerification(auth.currentUser)
+    //               .then(() => {
+    //                 console.log("sent");
+    //                 setSuccessMsg(
+    //                   "Registration successful! Check your email for the verification link."
+    //                 );
+    //               })
+    //               .then(() => {
+    //                 let userRef = ref(db, "users/" + user.uid);
+    //                 set(userRef, {
+    //                   fullName: user.displayName,
+    //                   email: user.email,
+    //                   profile_picture: user.photoURL,
+    //                 }).then(() => {
+    //                   console.log("done");
+    //                   setTimeout(() => {
+    //                     navigate("/login");
+    //                     setLoading(false);
+    //                   }, 1500);
+    //                 });
+    //               });
+    //           })
+    //           .catch((error) => {
+    //             console.log(error.code);
+    //           });
+    //       })
+    //       .catch((error) => {
+    //         setLoading(false);
+    //         const errorCode = error.code;
+    //         if (errorCode.includes("auth/email-already-in-use")) {
+    //           setFErrEmail("Sorry! This Email has already been registered.");
+    //         } else if (errorCode.includes("auth/network-request-failed")) {
+    //           setErrPass("Network error! Check your connection pls.");
+    //         }
+    //         console.log(errorCode);
+    //         // const errorMessage = error.message;
+    //       });
+    //   }
+    //   //  else {
+    //   //    createUserWithEmailAndPassword(auth, userRegEmail, userRegPass)
+    //   //      .then((userCredential) => {
+    //   //        // Signed in
+    //   //        const user = userCredential.user;
+    //   //        console.log(userCredential);
+    //   //        console.log(user);
+    //   //        // ...
+    //   //      })
+    //   //      .catch((error) => {
+    //   //        const errorCode = error.code;
+    //   //        const errorMessage = error.message;
+    //   //        // ..
+    //   //      });
+    //   // setSuccessMsg("Registration done!");
+    //   //  }
+  };
+
   return (
     <>
       {/* navbar */}
@@ -78,7 +186,10 @@ const Navbar = () => {
                 Sign In
               </button>
               <span>|</span>
-              <button className="uppercase hover:text-hoverPrimary linear duration-300 cursor-pointer" onClick={()=> setShowJoinModal(true)}>
+              <button
+                className="uppercase hover:text-hoverPrimary linear duration-300 cursor-pointer"
+                onClick={() => setShowJoinModal(true)}
+              >
                 Join
               </button>
             </div>
@@ -151,68 +262,97 @@ const Navbar = () => {
             showJoinModal ? "block" : "hidden"
           } animate-[smooth.3s_ease_1] grid place-items-center`}
         >
-          <div className="relative  w-[90%] md:w-2/5 bg-white text-center py-6 md:py-10 px-2 md:px-6 rounded-md animate-[popUp_.3s_ease_1]">
-            asdasdasd
-            {/* <h2 className="text-primary text-2xl md:text-[32px] leading-none font-semibold mb-12">
-              Create New Group
+          <div className="relative  w-[90%] md:w-2/5 bg-white text-center py-6 md:py-6 px-2 md:px-6 rounded-md animate-[popUp_.3s_ease_1] font-robo">
+            <picture className="block mx-auto w-1/4 mb-4">
+              <img src="images/logo.png" className="" loading="lazy" />
+            </picture>
+            <h2 className="text-hoverPrimary text-2xl md:text-[32px] leading-none font-semibold mb-12">
+              Create Your Account
             </h2>
-            <form className="w-4/5 m-auto" ref={refCreateGroupFrom}>
-              <input
-                type={"text"}
-                className="w-full py-2 md:py-3 px-2.5 md:px-4 rounded-md border-[1.5px] border-primary text-sm md:text-lg text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
-                placeholder="Group Name"
-                onChange={handleGName}
-              />
-              {grpNameErrMsg !== "" && (
-                <p className="pt-[2px] pl-1 text-sm text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
-                  {grpNameErrMsg}
-                </p>
-              )}
-              {grpNameFErrMsg !== "" && (
-                <p className="pt-[2px] pl-1 text-sm text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
-                  {grpNameFErrMsg}
-                </p>
-              )}
 
-              <input
-                type={"text"}
-                className="w-full mt-4 py-2 md:py-3 px-2.5 md:px-4 rounded-md border-[1.5px] border-primary text-sm md:text-lg text-primary outline-0 focus:border-focus linear duration-300 z-10"
-                placeholder="Group Tag"
-                onChange={handleGTag}
-              />
+            {/* ========== Registration form starts ========== */}
+            <form
+              action="#"
+              method="POST"
+              className="flex flex-col gap-y-3 w-3/4 md:w-3/5 m-auto lg:w-[370px] xl:w-[380px] mb-3.5 md:mb-4 lg:mb-3 xl:mb-5"
+            >
+              <div className="relative">
+                <input
+                  type={"email"}
+                  className="w-full py-2 md:py-3 font-normal px-2.5 md:px-4 rounded-sm border-[1.5px] border-primary text-sm md:text-lg text-[black] outline-0 focus:border-hoverPrimary linear duration-300 z-10"
+                  placeholder="Enter Your Email"
+                  onChange={handleEmail}
+                  autoFocus
+                />
+                <p className={``}>Email Address</p>
+                {errEmail !== "" && (
+                  <p className="xl:pt-[1px] text-[13px] md:text-lg lg:text-base pl-1 md:pl-4 lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                    {errEmail}
+                  </p>
+                )}
+                {fErrEmail !== "" && (
+                  <p className="xl:pt-[1px] text-[13px] md:text-lg lg:text-base pl-1 md:pl-4 lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                    {fErrEmail}
+                  </p>
+                )}
+              </div>
 
-              {grpTagErrMsg !== "" && (
-                <p className="pt-[2px] pl-1 text-sm text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
-                  {grpTagErrMsg}
-                </p>
-              )}
-              {grpTagFErrMsg !== "" && (
-                <p className="pt-[2px] pl-1 text-sm text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
-                  {grpTagFErrMsg}
-                </p>
-              )}
-              {grpSuccessMsg !== "" && (
-                <p className="pt-[3px] pl-1 text-base md:text-lg text-[green] font-semibold animate-[popDown_.4s_ease_1] text-left">
-                  {grpSuccessMsg}
-                </p>
-              )}
-              <RiCloseFill
-                className={
-                  "text-3xl md:text-[40px] mr-[1px] mt-[2px] text-primaryTwo/70 hover:text-primaryTwo linear duration-300 rounded-full font-semibold cursor-pointer absolute top-0 right-0"
-                }
-                onClick={closeModal}
-              />
-              <Button
-                customClass={`${
-                  loading ? "opacity-70 hover:bg-primary" : ""
-                } py-1 md:py-2 px-4 mt-6 md:mt-8 md:w-[50%] text-sm md:text-xl leading-[40px] rounded-md font-semibold`}
-                text={`${isCompleted ? "Done" : "Create Group"}`}
-                btnDisable={loading}
-                clickAct={handleGrpSubmit}
-                Loader={BeatLoader}
-                loadingStatus={false}
-              />
-            </form> */}
+              <div className="relative">
+                <input
+                  type={"text"}
+                  className="w-full py-2 md:py-3 font-normal px-2.5 md:px-4 rounded-sm border-[1.5px] border-primary text-sm md:text-lg text-[black] outline-0 focus:border-hoverPrimary linear duration-300 z-10"
+                  placeholder="Enter Your Name"
+                  onChange={handleName}
+                />
+                <p className={``}>Full Name</p>
+                {errName !== "" && (
+                  <p className="xl:pt-[1px] text-[13px] md:text-lg lg:text-base pl-1 md:pl-4 lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                    {errName}
+                  </p>
+                )}
+              </div>
+
+              <div className="relative">
+                <input
+                  type={`${passVisibility ? "text" : "password"}`}
+                  className="w-full py-2 md:py-3 font-normal px-2.5 md:px-4 rounded-sm border-[1.5px] border-primary text-sm md:text-lg text-[black] outline-0 focus:border-hoverPrimary linear duration-300 z-10"
+                  placeholder="Create a Strong Password"
+                  onChange={handlePass}
+                />
+                <p className={""}>Password</p>
+                {passVisibility ? (
+                  <RiEyeFill
+                    className="absolute top-[17px] md:top-7 lg:top-6 right-4 md:right-8 lg:right-6 text-[22px] md:text-[28px] opacity-60 cursor-pointer hover:opacity-80 linear duration-300"
+                    onClick={passShowHide}
+                  />
+                ) : (
+                  <RiEyeCloseLine
+                    className="absolute top-[17px] md:top-7 lg:top-6 right-4 md:right-8 lg:right-6 text-[22px] md:!text-[28px] opacity-60 cursor-pointer hover:opacity-80 linear duration-300"
+                    onClick={passShowHide}
+                  />
+                )}
+                {errPass !== "" && (
+                  <p className="xl:pt-[1px] text-[13px] md:text-lg lg:text-base pl-1 md:pl-4 lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                    {errPass}
+                  </p>
+                )}
+              </div>
+              <div>
+                <button
+                  className={`py-3.5 md:py-6 lg:py-3.5 w-full md:w-[95%] block m-auto lg:w-full md:text-xl rounded-sm font-semibold mb-1 text-white bg-hoverPrimary/80 hover:bg-hoverPrimary md:mb-3 linear duration-300`}
+                  clickAct={handleSubmit}
+                >
+                  Create Account
+                </button>
+              </div>
+            </form>
+            <p className="font-normal text-center text-black/80 text-xs md:text-[16.5px] lg:text-base me-2">
+              Already have an account ?{" "}
+              <span className="cursor-pointer text-hoverPrimary/80 hover:text-hoverPrimary">
+                Sign In
+              </span>
+            </p>
+            {/* ========== Registration form ends ========== */}
           </div>
         </div>
         {/* // ========== Create Group modal ends ==========  */}
